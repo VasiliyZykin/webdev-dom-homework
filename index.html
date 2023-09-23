@@ -7,8 +7,9 @@
   <link rel="stylesheet" href="styles.css" />
 </head>
 
-<body id="body">
+<body>
   <div class="container">
+    <div id="loading">Комментарии загружаются</div>
     <ul id="comments" class="comments">
 
     </ul>
@@ -49,7 +50,8 @@
     })
     .then((responseData) => {
       console.log(responseData);
-
+      const loader = document.getElementById('loading');
+      loader.style.display = "none";
       const appComments = responseData.comments.map((comment) => {
         console.log(comment);
         return {
@@ -68,8 +70,7 @@
           like: comment.likes,
           isLike: comment.isLiked,
         };
-      })
- 
+      });
       comments = appComments;
       renderComments();
     });
